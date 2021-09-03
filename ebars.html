@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<title>Scatter Chart</title>
+	<script async="" src="scatter_files/analytics.js"></script><script src="scatter_files/Chart.js"></script>
+	<script src="scatter_files/utils.js"></script>
+	<style>
+	canvas {
+		-moz-user-select: none;
+		-webkit-user-select: none;
+		-ms-user-select: none;
+	}
+	</style>
+<style type="text/css">/* Chart.js */
+@keyframes chartjs-render-animation{from{opacity:.99}to{opacity:1}}.chartjs-render-monitor{animation:chartjs-render-animation 1ms}.chartjs-size-monitor,.chartjs-size-monitor-expand,.chartjs-size-monitor-shrink{position:absolute;direction:ltr;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1}.chartjs-size-monitor-expand>div{position:absolute;width:1000000px;height:1000000px;left:0;top:0}.chartjs-size-monitor-shrink>div{position:absolute;width:200%;height:200%;left:0;top:0}</style></head>
+
+<body>
+	<div style="width:75%"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
+		<canvas id="canvas" style="display: block; width: 945px; height: 472px;" width="945" height="472" class="chartjs-render-monitor"></canvas>
+	</div>
+	<script>
+	             var color = Chart.helpers.color;
+	  //	  var poop = GetURLParameter('poop');
+	  const params = new URLSearchParams(document.location.search);
+	  const p7 = params.get("p7");
+	  const p9 = params.get("p9");
+	  const p11 = params.get("p11");
+	  const p13 = params.get("p13");
+	  const p15P = params.get("p15P");
+	  const p15 = params.get("p15");
+	  const p15B = params.get("p15B");
+	  const p17P = params.get("p17P");
+	  const p17 = params.get("p17");
+	  const p19P = params.get("p19P");
+	  const p19 = params.get("p19");
+	  const e1 = params.get("e1");
+	  const e2 = params.get("e2");
+	  const e3 = params.get("e3");
+	  const e4 = params.get("e4");
+	  const e5 = params.get("e5");
+	  const e6 = params.get("e6");
+	  const e7 = params.get("e7");
+	  const m = params.get("m");
+	  const b = params.get("b");
+	  const ty = params.get("ty");
+	  const titu = params.get("ta");
+	  const circ = params.get("tc");
+	  const muni = params.get("mun");
+	  
+
+	  //const o = params.get("o");
+		function generateData() {
+			var data = [];
+			for (var i = 0; i < 7; i++) {
+				data.push({
+					x: randomScalingFactor(),
+					y: randomScalingFactor()
+				});
+			}
+			return data;
+		}
+		var scatterChartData = {
+			datasets: [{
+				label: '',
+			    borderColor: 'black',
+			    pointRadius: 4,
+				backgroundColor: color(window.chartColors.blue).alpha(1.).rgbString(),
+//			    data: generateData()
+			    data: [{x:2007,y: p7},
+				   {x: 2009,y: p9},
+				   {x: 2011,y: p11},
+				   {x: 2013,y: p13},
+				   {x: 2014.8,y: p15P},
+				   {x: 2015,y: p15},
+				   {x: 2015.2,y: p15B},
+				   {x: 2016.8,y: p17P},
+				   {x: 2017,y: p17},
+				   {x: 2018.8,y: p19P},
+				   {x: 2019,y: p19}]
+				   //{x: -3,y: p4},
+				   //{x: -2,y:p5},{x: -1,y:p6},{x: 0,y:p7}]
+			},{
+			    label: '',
+			    type: 'line',
+			    //			    borderColor: 'red',
+			    borderColor: color(window.chartColors.red).alpha(0.).rgbString(),
+			    pointRadius : 0,
+			backgroundColor: color(window.chartColors.blue).alpha(0.).rgbString(),
+			    data: [{x: 2006, y: 0.0},{x: 2020, y : 0.9}]
+			}]
+		};
+
+		window.onload = function() {
+			var ctx = document.getElementById('canvas').getContext('2d');
+		    window.myScatter = Chart.Scatter(ctx, {
+			data: scatterChartData,
+				options: {
+					title: {
+						display: true,
+					    text: [titu,'Elecciones 2007 a 2019','Circuito: '+circ+' ('+muni+')']
+					},
+				    legend:{ display : false},
+				    scales: {
+				     yAxes: [{
+					 scaleLabel: {
+					     display: true,
+					     labelString: ty
+					 }
+				     }], xAxes: [{
+					 scaleLabel: {
+					     display: true,
+					     labelString: 'Años elecciones'
+					 },ticks: {
+  stepSize: 0.1,
+  autoSkip: false,
+					     callback: value => [2007,2009,2011,2013,2015,2017,2019].includes(value) ? value : undefined,
+  maxRotation: 0
+}
+					 
+				     }]
+				 } 
+				}
+		    });		    
+		};
+	</script>
+
+
+
+</body></html>
